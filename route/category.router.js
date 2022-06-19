@@ -16,7 +16,7 @@ CategoryRouter.post("/category", (req, res, next) => {
   CategoryController.insert(req, res, next);
 });
 
-CategoryRouter.put("/category", (req, res, next) => {
+CategoryRouter.put("/category/:id", (req, res, next) => {
   CategoryController.update(req, res, next);
 });
 

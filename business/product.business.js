@@ -44,7 +44,7 @@ exports.update = async (id, product) => {
     try {
         const productResult = await ProductRepository.findById(id);
         if(!productResult){
-            throw CreateErrorUtil.createError("Produto não encontrado", 404);;
+            throw CreateErrorUtil.createError("Produto não encontrado", 404);
         }
 
         return await ProductRepository.update(id,{...productResult, ...product});
@@ -54,11 +54,11 @@ exports.update = async (id, product) => {
     }
 }
 
-exports.deletar = async (id) => {
+exports.delete = async (id) => {
     try {
         const productDeleted = await ProductRepository.delete(id);
         if(!productDeleted){
-            throw CreateErrorUtil.createError("Produto não encontrado", 404);;
+            throw CreateErrorUtil.createError("Produto não encontrado", 404);
         }
         else {
             return productDeleted;
@@ -70,7 +70,7 @@ exports.deletar = async (id) => {
 }
 
 function productValidate(product) {
-    if(product && product.name && product.description && product.price && product.imageUrl && product.category){
+    if(product && product.name && product.description && product.price && product.imageUrl && product.categoryId){
         return true;
     }
     else {

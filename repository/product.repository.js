@@ -38,8 +38,8 @@ exports.insert = async (product) => {
     database.connect();
     try{
         const result = await database.query(
-            "INSERT INTO products(name, description, image_url, price, category) VALUES ($1, $2, $3, $4, $5) RETURNING *", 
-            [product.name, product.description, product.imageUrl, product.price, product.category]);
+            "INSERT INTO products(name, description, image_url, price, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *", 
+            [product.name, product.description, product.imageUrl, product.price, product.categoryId]);
         return(result.rows[0]);
     }
     catch(error) {
@@ -58,8 +58,8 @@ exports.update = async (id, product) => {
     database.connect();
     try{
         const result = await database.query(
-            "UPDATE products SET name=$1, description=$2, image_url=$3, price=$4, category=$5 WHERE id=$6 RETURNING *", 
-            [product.name, product.description, product.imageUrl, product.price, product.category, id]);
+            "UPDATE products SET name=$1, description=$2, image_url=$3, price=$4, category_id=$5 WHERE id=$6 RETURNING *", 
+            [product.name, product.description, product.imageUrl, product.price, product.categoryId, id]);
         return(result.rows[0]);
     }
     catch(error) {

@@ -54,11 +54,11 @@ exports.update = async (id, category) => {
     }
 }
 
-exports.deletar = async (id) => {
+exports.delete = async (id) => {
     try {
         const categoryDeleted = await CategoryRepository.delete(id);
         if(!categoryDeleted){
-            throw CreateErrorUtil.createError("Categoria não encontrada", 404);;
+            throw CreateErrorUtil.createError("Categoria não encontrada", 404);
         }
         else {
             return categoryDeleted;

@@ -24,9 +24,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(__dirname + '/public'));
+
 /* Routes */
-app.use(CategoryRoute);
-app.use(ProductRoute);
+app.use("/api",CategoryRoute);
+app.use("/api",ProductRoute);
 /* END Routes */
 
 /* Error handling */

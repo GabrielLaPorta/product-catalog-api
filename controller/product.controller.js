@@ -1,3 +1,4 @@
+const fs = require('fs');
 const {ProductBusiness} = require('../business');
 
 exports.findAll = async (req, res) => {
@@ -65,6 +66,15 @@ exports.delete = async (req, res) => {
     
     try{
         const product = await ProductBusiness.delete(id);
+        const image_url = __dirname.replace("/controller", "") + "/public" + product.image_url.replace(req.protocol + "://" + req.get("host"), "")
+        
+        fs.unlink(image_url, (error) => {
+            if (error) {
+              console.error(error)
+              return error
+            }
+        });
+
         res.json(product);                
     }
     catch (error) {
@@ -74,5 +84,21 @@ exports.delete = async (req, res) => {
         else {
             res.status(500).json({message: "Erro inesperado"});            
         }
+    }
+}
+
+exports.uploadImage = async (req, res) => {
+    try{
+        if(req.file) {
+            res.status(201).json({
+                imageUrl: req.protocol + "://" + req.get('host') + req.file.path.substring(6),
+                message: "Upload realizado com sucesso"
+            });                
+        } else {
+            res.status(400).json({message: "Falha no upload"})
+        }
+    }
+    catch (error) {
+        res.status(500).json({message: "Erro inesperado"});            
     }
 }
