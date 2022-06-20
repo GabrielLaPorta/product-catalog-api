@@ -91,7 +91,7 @@ exports.uploadImage = async (req, res) => {
     try{
         if(req.file) {
             res.status(201).json({
-                imageUrl: req.protocol + "://" + req.get('host') + req.file.path.substring(6),
+                imageUrl: req.file.path,
                 message: "Upload realizado com sucesso"
             });                
         } else {
