@@ -5,28 +5,16 @@ const {ImageUploadMiddleware} = require("../middleware");
 
 const ProductRouter = express.Router();
 
-ProductRouter.get("/product/:id", (req, res, next) => {
-  ProductController.findById(req, res, next);
-});
+ProductRouter.get("/product/:id", ProductController.findById);
 
-ProductRouter.get("/product", (req, res, next) => {
-  ProductController.findAll(req, res, next);
-});
+ProductRouter.get("/product", ProductController.findAll);
 
-ProductRouter.post("/product", (req, res, next) => {
-  ProductController.insert(req, res, next);
-});
+ProductRouter.post("/product", ProductController.insert);
 
-ProductRouter.post("/product/upload-image", ImageUploadMiddleware.single("image"), (req, res, next) => {
-  ProductController.uploadImage(req, res, next);
-});
+ProductRouter.post("/product/upload-image", ImageUploadMiddleware.single("image"), ProductController.uploadImage);
 
-ProductRouter.put("/product/:id", (req, res, next) => {
-  ProductController.update(req, res, next);
-});
+ProductRouter.put("/product/:id", ProductController.update);
 
-ProductRouter.delete("/product/:id", (req, res, next) => {
-  ProductController.delete(req, res, next);
-});
+ProductRouter.delete("/product/:id", ProductController.delete);
 
 module.exports = ProductRouter;

@@ -4,24 +4,14 @@ const {CategoryController} = require("../controller");
 
 const CategoryRouter = express.Router();
 
-CategoryRouter.get("/category/:id", (req, res, next) => {
-  CategoryController.findById(req, res, next);
-});
+CategoryRouter.get("/category/:id", CategoryController.findById);
 
-CategoryRouter.get("/category", (req, res, next) => {
-  CategoryController.findAll(req, res, next);
-});
+CategoryRouter.get("/category", CategoryController.findAll);
 
-CategoryRouter.post("/category", (req, res, next) => {
-  CategoryController.insert(req, res, next);
-});
+CategoryRouter.post("/category", CategoryController.insert);
 
-CategoryRouter.put("/category/:id", (req, res, next) => {
-  CategoryController.update(req, res, next);
-});
+CategoryRouter.put("/category/:id", CategoryController.update);
 
-CategoryRouter.delete("/category/:id", (req, res, next) => {
-  CategoryController.delete(req, res, next);
-});
+CategoryRouter.delete("/category/:id", CategoryController.delete);
 
 module.exports = CategoryRouter;

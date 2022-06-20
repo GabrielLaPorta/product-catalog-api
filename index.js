@@ -3,7 +3,9 @@ require("dotenv").config();
 const app = express();
 const cors = require("cors");
 
-const { ProductRoute, CategoryRoute } = require("./route");
+const { CategoryRoute, LoginRoute, ProductRoute, UserRoute } = require("./route");
+
+const { ValidateTokenMiddleware } = require("./middleware");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,12 +25,14 @@ app.use((req, res, next) => {
 
   next();
 });
-
 app.use(express.static(__dirname + '/public'));
-
-/* Routes */
+/* Unauthenticated Routes */
+app.use("/api",LoginRoute);
+app.use(ValidateTokenMiddleware);
+/*Authenticated Routes */
 app.use("/api",CategoryRoute);
 app.use("/api",ProductRoute);
+app.use("/api",UserRoute);
 /* END Routes */
 
 /* Error handling */

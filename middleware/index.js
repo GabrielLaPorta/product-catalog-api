@@ -1,3 +1,4 @@
 module.exports = {
-    ImageUploadMiddleware: require("./upload-image")
+    ImageUploadMiddleware: require("./upload-image"),
+    ValidateTokenMiddleware: require("./validate-token")
 };
