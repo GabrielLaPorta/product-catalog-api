@@ -1,0 +1,1517 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Product Catalog - Tests",
+    "dateExported": "2022-06-21T03:01:07.554Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "18c52bf5-bf5d-4ca2-be6e-ec97c34323ca",
+            "name": "login",
+            "containerId": "",
+            "created": "2022-06-20T23:46:26.516Z",
+            "sortNum": 5000
+        },
+        {
+            "_id": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "product",
+            "containerId": "",
+            "created": "2022-06-20T23:46:26.513Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "user",
+            "containerId": "",
+            "created": "2022-06-20T23:46:26.514Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "category",
+            "containerId": "",
+            "created": "2022-06-20T23:46:26.515Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "4d37857e-3564-40e4-95d9-f5cde74f92b4",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "upload-image-failed",
+            "url": "{{host}}/api/product/upload-image",
+            "method": "POST",
+            "sortNum": 7500,
+            "created": "2022-06-21T00:45:36.362Z",
+            "modified": "2022-06-21T00:47:13.092Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "/home/glaporta/Downloads/62a5fca3-add9-489a-926c-1b3e223c6346.webp"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Falha no upload\""
+                }
+            ]
+        },
+        {
+            "_id": "86e7b4fe-b077-48d1-97bf-2b72c9e0efe4",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "upload-image-success",
+            "url": "{{host}}/api/product/upload-image",
+            "method": "POST",
+            "sortNum": 8750,
+            "created": "2022-06-20T23:46:26.519Z",
+            "modified": "2022-06-21T00:49:03.844Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "/home/glaporta/Downloads/fa30d036-3e51-46bd-9875-6510e81e4750.jpeg"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"imageUrl\""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Upload realizado com sucesso\""
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.imageUrl",
+                    "action": "setto",
+                    "value": "{{imageUrl}}"
+                }
+            ]
+        },
+        {
+            "_id": "42870923-63b3-467e-8a08-69900260c324",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "insert-product-success",
+            "url": "{{host}}/api/product",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-06-20T23:46:26.515Z",
+            "modified": "2022-06-21T00:56:45.236Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Pulseira banhada a ouro com garantia de 6 meses"
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4"
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "{{imageUrl}}"
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.00"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"id\""
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.id",
+                    "action": "setto",
+                    "value": "{{productId}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{product}}"
+                }
+            ]
+        },
+        {
+            "_id": "01f391b3-d7aa-46cb-8f90-aa436794690f",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "insert-product-failed",
+            "url": "{{host}}/api/product",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2022-06-21T00:47:50.250Z",
+            "modified": "2022-06-21T01:01:50.681Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Pulseira banhada a ouro com garantia de 6 meses"
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4"
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "http://localhost:8080/images/1655690104932_fa30d036-3e51-46bd-9875-6510e81e4750.jpeg"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Faltam parâmetros do produto\""
+                }
+            ]
+        },
+        {
+            "_id": "47a7929a-f3d3-4727-b8bd-c5c475a8f9b2",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "get-products",
+            "url": "{{host}}/api/product",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-06-20T23:46:26.516Z",
+            "modified": "2022-06-21T00:57:39.034Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "8b8822a9-c07a-4639-b851-34f2bd82d0c0",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "get-product-sucess",
+            "url": "{{host}}/api/product/{{productId}}",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2022-06-21T00:53:35.893Z",
+            "modified": "2022-06-21T00:57:57.347Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{product}}"
+                }
+            ]
+        },
+        {
+            "_id": "4994ac43-6f9b-4995-9865-4c558c381b7a",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "get-product-failed",
+            "url": "{{host}}/api/product/d35e6606-39f3-4d22-adbc-186e613e017b",
+            "method": "GET",
+            "sortNum": 27500,
+            "created": "2022-06-21T00:58:51.522Z",
+            "modified": "2022-06-21T01:00:39.697Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notequal",
+                    "value": "{{product}}"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Produto não encontrado\""
+                }
+            ]
+        },
+        {
+            "_id": "8c1aef98-e348-4fe7-8539-3cf75fa40f9a",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "update-product-success",
+            "url": "{{host}}/api/product/{{productId}}",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2022-06-20T23:46:26.517Z",
+            "modified": "2022-06-21T01:09:09.551Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Pulseira de prata"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Pulseira banhada a ouro com garantia de 6 meses"
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4"
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "{{productId}}"
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.00"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notequal",
+                    "value": "{{product}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{productUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "026e0ec2-2830-4f9c-9d71-60170dee0ecb",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "update-product-failed",
+            "url": "{{host}}/api/product/e6e2437f-2898-4a4a-814c-a0b63329f523",
+            "method": "PUT",
+            "sortNum": 35000,
+            "created": "2022-06-21T01:02:17.121Z",
+            "modified": "2022-06-21T01:07:12.499Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Pulseira banhada a ouro com garantia de 6 meses"
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4"
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "http://localhost:8080/images/1655670173892_fa30d036-3e51-46bd-9875-6510e81e4750.jpeg"
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.90"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Produto não encontrado\""
+                }
+            ]
+        },
+        {
+            "_id": "7f3cf218-c2ab-4f04-82a2-17da11f04144",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "delete-product-success",
+            "url": "{{host}}/api/product/{{productId}}",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2022-06-20T23:46:26.518Z",
+            "modified": "2022-06-21T01:58:27.960Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{productUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "b1806c63-1650-4e38-805b-6af3f75d7e9d",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "insert-category-success",
+            "url": "{{host}}/api/category",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2022-06-20T23:46:26.526Z",
+            "modified": "2022-06-21T01:43:12.335Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "test corrente"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"id\""
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.id",
+                    "action": "setto",
+                    "value": "{{categoryId}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{category}}"
+                }
+            ]
+        },
+        {
+            "_id": "664c80d8-e11c-438b-adc6-ee5e80e3319b",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "7589e3c3-7065-4327-8653-03fefbbb1361",
+            "name": "delete-product-failed",
+            "url": "{{host}}/api/product/d17cb2e3-7afb-4256-8705-6cc4c880fa4f",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2022-06-21T01:07:31.551Z",
+            "modified": "2022-06-21T01:11:06.782Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "description",
+                        "value": "",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "http://localhost:8080/images/1655670173892_fa30d036-3e51-46bd-9875-6510e81e4750.jpeg",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.00",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Produto não encontrado\""
+                }
+            ]
+        },
+        {
+            "_id": "7fd1bf66-18f7-4160-b578-d857cba337ab",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "insert-user-success",
+            "url": "{{host}}/api/user",
+            "method": "POST",
+            "sortNum": 62500,
+            "created": "2022-06-20T23:46:26.521Z",
+            "modified": "2022-06-21T01:26:19.987Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "test@test.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{ \"email\": \"test@test.com\" }"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.id",
+                    "action": "setto",
+                    "value": "{{userId}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{user}}"
+                }
+            ]
+        },
+        {
+            "_id": "dd503e28-3876-410e-b87d-773a83dbbbcc",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "insert-user-failed",
+            "url": "{{host}}/api/user",
+            "method": "POST",
+            "sortNum": 63750,
+            "created": "2022-06-21T01:16:42.428Z",
+            "modified": "2022-06-21T01:20:56.352Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "test@test.com"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Faltam parâmetros do usuário\""
+                }
+            ]
+        },
+        {
+            "_id": "f7a24844-b3b6-459b-af41-60d07ee9ebc9",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "get-users",
+            "url": "{{host}}/api/user",
+            "method": "GET",
+            "sortNum": 64375,
+            "created": "2022-06-20T23:46:26.520Z",
+            "modified": "2022-06-21T01:18:47.600Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "99293199-a2e5-4d93-9060-e4e000d62575",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "get-user-success",
+            "url": "{{host}}/api/user/{{userId}}",
+            "method": "GET",
+            "sortNum": 65000,
+            "created": "2022-06-21T01:16:02.678Z",
+            "modified": "2022-06-21T01:27:46.864Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{user}}"
+                }
+            ]
+        },
+        {
+            "_id": "8d66d419-5916-47d0-bb6d-d3ec80e2cf66",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "get-user-failed",
+            "url": "{{host}}/api/user/d35e6606-39f3-4d22-adbc-186e613e017b",
+            "method": "GET",
+            "sortNum": 67500,
+            "created": "2022-06-21T01:16:18.616Z",
+            "modified": "2022-06-21T01:30:27.384Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notequal",
+                    "value": "{{user}}"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Usuário não encontrada\""
+                }
+            ]
+        },
+        {
+            "_id": "b8ee4d77-12c2-47af-b8f4-8211eebd9868",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "18c52bf5-bf5d-4ca2-be6e-ec97c34323ca",
+            "name": "login-failed",
+            "url": "{{host}}/api/login",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2022-06-21T00:25:17.258Z",
+            "modified": "2022-06-21T00:29:43.961Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "gabriel@test.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "3214654444"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{ \"message\": \"Email ou senha inválidos\", \"status\": 401 }"
+                }
+            ]
+        },
+        {
+            "_id": "0b6b96b5-ea56-4422-8996-d480ef0df893",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "insert-category-failed",
+            "url": "{{host}}/api/category",
+            "method": "POST",
+            "sortNum": 75000,
+            "created": "2022-06-21T01:43:28.357Z",
+            "modified": "2022-06-21T01:44:10.231Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Faltam parâmetros da categoria\""
+                }
+            ]
+        },
+        {
+            "_id": "a322ebf9-27eb-40e0-a776-57632073bd55",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "update-user-success",
+            "url": "{{host}}/api/user/{{userId}}",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2022-06-20T23:46:26.523Z",
+            "modified": "2022-06-21T01:33:14.264Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "test1@test.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notequal",
+                    "value": "{{user}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{userUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "2600dbf2-ed92-42ad-b185-b6e2cea309d3",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "update-user-failed",
+            "url": "{{host}}/api/user/e6e2437f-2898-4a4a-814c-a0b63329f511",
+            "method": "PUT",
+            "sortNum": 85000,
+            "created": "2022-06-21T01:17:16.284Z",
+            "modified": "2022-06-21T01:34:10.235Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "test@test.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Usuário não encontrada\""
+                }
+            ]
+        },
+        {
+            "_id": "c309aced-c8f4-406a-a7c3-4d45c16043cf",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "delete-user-success",
+            "url": "{{host}}/api/user/{{userId}}",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2022-06-20T23:46:26.524Z",
+            "modified": "2022-06-21T01:58:17.378Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{userUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "5713bb7f-ac32-4132-90e0-0bea79a8f61e",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "get-categories",
+            "url": "{{host}}/api/category",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2022-06-20T23:46:26.525Z",
+            "modified": "2022-06-21T02:00:11.258Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "5d21fa3d-dabf-4dae-8267-3e03a115b5cb",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "d54c23e0-7d6f-4336-9766-e68f155f3589",
+            "name": "delete-user-failed",
+            "url": "{{host}}/api/user/e6e2437f-2898-4a4a-814c-a0b63329f511",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2022-06-21T01:17:44.728Z",
+            "modified": "2022-06-21T01:36:05.341Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "description",
+                        "value": "",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "http://localhost:8080/images/1655670173892_fa30d036-3e51-46bd-9875-6510e81e4750.jpeg",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.00",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Usuário não encontrada\""
+                }
+            ]
+        },
+        {
+            "_id": "95258d00-008f-4a2d-a9bc-e279a5216192",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "get-category-success",
+            "url": "{{host}}/api/category/{{categoryId}}",
+            "method": "GET",
+            "sortNum": 105000,
+            "created": "2022-06-21T01:39:26.828Z",
+            "modified": "2022-06-21T01:44:39.865Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{category}}"
+                }
+            ]
+        },
+        {
+            "_id": "c6fca40a-72ed-45c1-af68-668c8c919ed2",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "get-category-failed",
+            "url": "{{host}}/api/category/-1",
+            "method": "GET",
+            "sortNum": 107500,
+            "created": "2022-06-21T01:39:58.461Z",
+            "modified": "2022-06-21T01:45:55.233Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Categoria não encontrada\""
+                }
+            ]
+        },
+        {
+            "_id": "19463bab-642d-4edb-88bc-8586ce27a21b",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "update-category-sucess",
+            "url": "{{host}}/api/category/{{categoryId}}",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2022-06-20T23:46:26.527Z",
+            "modified": "2022-06-21T01:48:00.446Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "test2"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notequal",
+                    "value": "{{category}}"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.",
+                    "action": "setto",
+                    "value": "{{categoryUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "b4d6fa5c-a2ff-4e14-9535-93c86e9b8f39",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "update-category-failed",
+            "url": "{{host}}/api/category/-1",
+            "method": "PUT",
+            "sortNum": 125000,
+            "created": "2022-06-21T01:48:20.262Z",
+            "modified": "2022-06-21T01:49:29.908Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "test2"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": " \"message\": \"Categoria não encontrada\""
+                }
+            ]
+        },
+        {
+            "_id": "77354fe0-578b-47bc-a694-da5976c0a708",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "delete-category-success",
+            "url": "{{host}}/api/category/{{categoryId}}",
+            "method": "DELETE",
+            "sortNum": 130000,
+            "created": "2022-06-20T23:46:26.528Z",
+            "modified": "2022-06-21T01:58:22.672Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{{categoryUpdated}}"
+                }
+            ]
+        },
+        {
+            "_id": "6331d668-7d60-43ad-9abc-e3b9de24e254",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "18c52bf5-bf5d-4ca2-be6e-ec97c34323ca",
+            "name": "login-success",
+            "url": "{{host}}/api/login",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2022-06-20T23:46:26.529Z",
+            "modified": "2022-06-21T00:29:06.140Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "gabriel@test.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{token}}"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"token\""
+                }
+            ]
+        },
+        {
+            "_id": "737d17ba-0fdd-4751-9eee-c928a612bd8d",
+            "colId": "0d172b05-4748-4add-b6b7-71856f6baaa3",
+            "containerId": "295a6659-20ef-4ee9-9501-f6e338ba3746",
+            "name": "delete-category-failed",
+            "url": "{{host}}/api/category/-1",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2022-06-21T01:49:44.774Z",
+            "modified": "2022-06-21T01:53:29.866Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Algema metade corrente",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "description",
+                        "value": "",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "categoryId",
+                        "value": "4",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "imageUrl",
+                        "value": "http://localhost:8080/images/1655670173892_fa30d036-3e51-46bd-9875-6510e81e4750.jpeg",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "price",
+                        "value": "149.00",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "\"message\": \"Categoria não encontrada\""
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "headers": [],
+        "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+        },
+        "tests": [],
+        "envId": "fdf62d2e-ae40-4000-b96a-5c677c996ee9"
+    }
+}
