@@ -6,7 +6,7 @@ exports.findAll = async () => {
     const database = new Client(connectionString);
     database.connect();
     try {
-        const result = await database.query('SELECT email from public."user"');
+        const result = await database.query('SELECT id,email from public."user"');
         return (result.rows);
     } catch (error) {
         throw error;
@@ -19,7 +19,7 @@ exports.findById = async (id) => {
     const database = new Client(connectionString);
     database.connect();
     try{
-        const result = await database.query('SELECT email FROM public."user" WHERE id=$1', [id]);
+        const result = await database.query('SELECT id,email FROM public."user" WHERE id=$1', [id]);
         return(result.rows[0]);        
     }
     catch (error) {
@@ -56,7 +56,7 @@ exports.insert = async (user) => {
     database.connect();
     try{
         const result = await database.query(
-            'INSERT INTO public."user"(email, password) VALUES ($1, $2) RETURNING email', 
+            'INSERT INTO public."user"(email, password) VALUES ($1, $2) RETURNING id,email', 
             [user.email, user.password]);
         return(result.rows[0]);
     }
@@ -76,7 +76,7 @@ exports.update = async (id, user) => {
     database.connect();
     try{
         const result = await database.query(
-            'UPDATE public."user" SET email=$1, password=$2 WHERE id=$3 RETURNING email', 
+            'UPDATE public."user" SET email=$1, password=$2 WHERE id=$3 RETURNING id,email', 
             [user.email, user.password, id]);
         return(result.rows[0]);
     }
@@ -95,7 +95,7 @@ exports.delete = async (id) => {
     const database = new Client(connectionString);
     database.connect();
     try{
-        const result = await database.query('DELETE FROM public."user" WHERE id=$1 RETURNING email', [id]);
+        const result = await database.query('DELETE FROM public."user" WHERE id=$1 RETURNING id,email', [id]);
         return(result.rows[0]);
     }
     catch(error) {
