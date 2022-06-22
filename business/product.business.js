@@ -26,10 +26,14 @@ exports.findById = async (id) => {
 exports.insert = async (product) => {
     const validation = productValidate(product);
     if(validation instanceof Error) throw validation;
-
     try{
-        const insertedProduct = await ProductRepository.insert(product);
-        return insertedProduct;
+        if(product.categoryName){
+            const productInserted = await ProductRepository.insertWithCategory(product);
+            return productInserted;
+        }else {
+            const productInserted = await ProductRepository.insert(product);
+            return productInserted;
+        }
     }
     catch(error) {
         throw error;
@@ -70,7 +74,10 @@ exports.delete = async (id) => {
 }
 
 function productValidate(product) {
-    if(product && product.name && product.description && product.price && product.imageUrl && product.categoryId){
+    if(product && product.name && product.description && product.price && product.imageUrl && (product.categoryId || product.categoryName)){
+        if (product.categoryId && product.categoryName) {
+            return CreateErrorUtil.createError("O parâmetro de categoria só pode ser ou o 'categoryId' ou o 'categoryName'", 400);
+        }
         return true;
     }
     else {

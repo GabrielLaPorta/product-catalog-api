@@ -53,6 +53,42 @@ exports.insert = async (product) => {
     }
 }
 
+exports.insertWithCategory = async (product) => {
+    const database = new Client(connectionString);
+    database.connect();
+    try{
+        await database.query('BEGIN');
+        console.log('BEGIN');
+        let categoryResult = await database.query(
+            "INSERT INTO categories(name) VALUES ($1) RETURNING *", 
+            [product.categoryName]);
+
+        categoryResult = categoryResult.rows[0];
+        console.log('INSERT CATEGORY');
+
+        const productResult = await database.query(
+            "INSERT INTO products(name, description, image_url, price, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *", 
+            [product.name, product.description, product.imageUrl, product.price, categoryResult.id]);
+        console.log('INSERT PRODUCT');
+
+        await database.query('COMMIT');
+        console.log('COMMIT');
+
+        return (productResult.rows[0]);
+    } catch(error) {
+        await database.query('ROLLBACK');
+        console.log('ROLLBACK');
+        throw {
+            name: error.name,
+            message: error.message,
+            status: 500
+        }; 
+    }
+    finally {
+        database.end();
+    }
+}
+
 exports.update = async (id, product) => {
     const database = new Client(connectionString);
     database.connect();
