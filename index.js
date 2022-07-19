@@ -9,7 +9,11 @@ const { ValidateTokenMiddleware } = require("./middleware");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*")
