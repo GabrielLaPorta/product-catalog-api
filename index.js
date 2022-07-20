@@ -10,7 +10,7 @@ const { ValidateTokenMiddleware } = require("./middleware");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://bia-pereira-semijoias.herokuapp.com'],
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
