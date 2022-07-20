@@ -33,6 +33,57 @@ exports.findById = async (id) => {
     }
 }
 
+exports.findByCategoryId = async (categoryId) => {
+    const database = new Client(connectionString);
+    database.connect();
+    try{
+        const result = await database.query("SELECT * FROM products WHERE id=$1 AND category_id=$2", [id, categoryId]);
+        return(result.rows);        
+    }
+    catch (error) {
+        throw {
+            name: error.name,
+            message: error.message,
+            status: 500
+        }; 
+    } finally {
+        database.end();
+    }
+}
+
+exports.search = async (term = "", categoryId) => {
+    const database = new Client(connectionString);
+    database.connect();
+    try{
+        const sqlWithCategory = `
+            SELECT *, c.name as category_name, p.name as name, p.id as id FROM products p
+            INNER JOIN categories c ON c.id = p.category_id 
+            WHERE (UPPER(p.name) LIKE UPPER($1) OR UPPER(description) LIKE UPPER($1)) AND category_id=$2
+        `;
+        const sqlWithoutCategory = `
+            SELECT *, c.name as category_name, p.name as name, p.id as id FROM products p
+            INNER JOIN categories c ON c.id = p.category_id
+            WHERE UPPER(p.name) LIKE UPPER($1) OR UPPER(description) LIKE UPPER($1)
+        `;
+        const sql = categoryId ? sqlWithCategory : term ? sqlWithoutCategory : `
+            SELECT *, c.name as category_name, p.name as name, p.id as id FROM products p
+            INNER JOIN categories c ON c.id = p.category_id
+        `;
+        const params = categoryId ?  ['%'+term+'%', categoryId] : term ? ['%'+term+'%'] : null;
+        const result = await database.query(sql, params);
+        return(result.rows);
+    }
+    catch (error) {
+        throw {
+            name: error.name,
+            message: error.message,
+            status: 500
+        }; 
+    } finally {
+        database.end();
+    }
+}
+
 exports.insert = async (product) => {
     const database = new Client(connectionString);
     database.connect();

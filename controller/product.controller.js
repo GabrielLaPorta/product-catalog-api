@@ -26,6 +26,40 @@ exports.findById = async (req, res) => {
     }
 }
 
+
+exports.findByCategoryId = async (req, res) => {
+    const categoryId = req.params.categoryId;
+    try{
+        const products = await ProductBusiness.findByCategoryId(categoryId);
+        res.json(products);                
+    }
+    catch (error) {
+        if(error.status) {
+            res.status(error.status).json(error);
+        }
+        else {
+            res.status(500).json({message: "Erro inesperado"});            
+        }
+    }
+}
+
+
+exports.search = async (req, res) => {
+    const {term, categoryId} = req.query;
+    try{
+        const products = await ProductBusiness.search(term, categoryId);
+        res.json(products);                
+    }
+    catch (error) {
+        if(error.status) {
+            res.status(error.status).json(error);
+        }
+        else {
+            res.status(500).json({message: "Erro inesperado"});            
+        }
+    }
+}
+
 exports.insert = async (req, res) => {
     const product = req.body;
     

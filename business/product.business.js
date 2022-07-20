@@ -23,6 +23,24 @@ exports.findById = async (id) => {
     }
 }
 
+exports.findByCategoryId = async (categoryId) => {
+    try {
+        return await ProductRepository.findByCategoryId(categoryId);
+    }
+    catch(error) {
+        throw error;
+    }
+}
+
+exports.search = async (term, categoryId) => {
+    try {
+        return await ProductRepository.search(term, categoryId);
+    }
+    catch(error) {
+        throw error;
+    }
+}
+
 exports.insert = async (product) => {
     const validation = productValidate(product);
     if(validation instanceof Error) throw validation;
