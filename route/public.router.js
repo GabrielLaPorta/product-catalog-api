@@ -6,6 +6,4 @@ const PublicRouter = express.Router();
 PublicRouter.get("/category", CategoryController.findAll);
 PublicRouter.get("/product", ProductController.findAll);
 PublicRouter.get("/product/search", ProductController.search);
-PublicRouter.get("/product/:categoryId", ProductController.findByCategoryId);
-
 module.exports = PublicRouter;
